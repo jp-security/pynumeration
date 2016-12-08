@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2 divtable">
+  <table class="table table-lined" id="host">
+    <thead>
+      <th class="sorting">IP</th>
+      <th class="sorting">Port State</th>
+      <th class="sorting">Port Number</th>
+      <th class="sorting">Port Name</th>
+      <th class="sorting">Product</th>
+      <th class="sorting">Version</th>
+    </thead>
+  </table>
+
+  <script>
+  var pathname = window.location.pathname;
+
+  $.get('/raw' + pathname).done(function(host){
+    var data = JSON.parse(host)
+
+    $('#host').DataTable({
+      order: [[2, 'asc']],
+      paging: false,
+      data: data,
+      "aoColumns": [
+        { 'mData': "ip"},
+        { 'mData': 'portstate'},
+        { 'mData': 'portnumber'},
+        { 'mData': 'portname'},
+        { 'mData': 'product'},
+        { 'mData': 'version'}
+      ]
+    });
+  });
+  </script>
+</div>
+{% endblock %}

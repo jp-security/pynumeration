@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+  <table class="table table-lined" id="hosts">
+    <thead>
+      <th class="sorting">IP</th>
+      <th class="sorting">Host Name</th>
+      <th class="sorting"># Open Ports</th>
+    </thead>
+  </table>
+</div>
+
+  <script>
+  $.get('/raw/hosts').done(function(hosts){
+    var data = JSON.parse(hosts)
+
+    $('#hosts').DataTable({
+      order: [[2, 'desc']],
+      paging: true,
+      data: data,
+      "aoColumns": [
+        { 'mData': "ip",
+          'render': function ( data, row, meta ) {
+            return '<a href="/' + data +'">' + data + '</a>';
+          }},
+        { 'mData': 'hostname'},
+        { 'mData': 'openports'}
+      ]
+    });
+  });
+  </script>
+{% endblock %}
