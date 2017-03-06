@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+  <table class="table table-lined" id="ports">
+    <thead>
+      <th class="sorting">IP</th>
+      <th class="sorting">Product</th>
+      <th class="sorting">Version</th>
+    </thead>
+  </table>
+</div>
+
+  <script>
+  var pathname = window.location.pathname;
+
+  $.get('/raw' + pathname).done(function(ports){
+    var data = JSON.parse(ports)
+
+    $('#ports').DataTable({
+      order: [[0, 'desc']],
+      paging: false,
+      data: data,
+      "aoColumns": [
+        {'mData': "ip"},
+        {'mData': "product"},
+        {'mData': "version"}
+      ]
+    });
+  });
+  </script>
+{% endblock %}

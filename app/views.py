@@ -40,3 +40,20 @@ def host_ip(host_ip):
 
     return render_template('hostinformation.html',
                             title='Host Information')
+
+@app.route('/raw/ports/<portinfo>')
+def port_json(portinfo):
+    port_information = models.HostInformation.query.filter_by(port_number=portinfo).all()
+
+    allPortInfo = []
+
+    for port in port_information:
+        portInfo = {'ip': port.host, 'product': port.product_used, 'version': port.product_version}
+        allPortInfo.append(portInfo)
+
+    return json.dumps(allPortInfo)
+
+@app.route('/ports/<port_number>')
+def port_number(port_number):
+    return render_template('port_information.html',
+                            title='Port Information')

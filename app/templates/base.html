@@ -15,6 +15,35 @@
     <link rel="stylesheet" type="text/css" href="/static/site.css">
   </head>
   <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <p class="navbar-text">PyNumeration</p>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Port Information<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url_for('port_number', port_number='21') }}">FTP</a></li>
+                <li><a href="{{ url_for('port_number', port_number='22') }}">SSH</a></li>
+                <li><a href="{{ url_for('port_number', port_number='23') }}">Telnet</a></li>
+                <li><a href="{{ url_for('port_number', port_number='25') }}">SMTP</a></li>
+                <li><a href="{{ url_for('port_number', port_number='80') }}">HTTP</a></li>
+                <li><a href="{{ url_for('port_number', port_number='443') }}">HTTPs</a></li>
+                <li><a href="{{ url_for('port_number', port_number='110') }}">pop3</a></li>
+                <li><a href="{{ url_for('port_number', port_number='139') }}">Netbios</a></li>
+                <li><a href="{{ url_for('port_number', port_number='143') }}">Imap</a></li>
+                <li><a href="{{ url_for('port_number', port_number='445') }}">Netbios-ssn</a></li>
+                <li><a href="{{ url_for('port_number', port_number='995') }}">Pop3s</a></li>
+                <li><a href="{{ url_for('port_number', port_number='3306') }}">MySQL</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>                
     {% block content %}{% endblock %}
   </body>
 </html>
